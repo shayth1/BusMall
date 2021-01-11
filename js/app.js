@@ -1,6 +1,6 @@
 "use strict"
 
-var arrayOfProducts = [];
+var itemsArr = [];
 
 var leftImage = document.getElementById('left_product');
 var midImage = document.getElementById('middle_product');
@@ -20,44 +20,44 @@ function Product(name, image) {
     this.counter = 0;
     this.timesShown = 0;
 
-    arrayOfProducts.push(this);
+    itemsArr.push(this);
 }
 
 function renderImages(leftProducts, midProducts, rightProducts) {
-    leftImage.setAttribute("src", arrayOfProducts[leftProducts].url);
-    midImage.setAttribute("src", arrayOfProducts[midProducts].url);
-    rightImage.setAttribute("src", arrayOfProducts[rightProducts].url);
+    leftImage.setAttribute("src", itemsArr[leftProducts].url);
+    midImage.setAttribute("src", itemsArr[midProducts].url);
+    rightImage.setAttribute("src", itemsArr[rightProducts].url);
 
     numberShown(leftProducts, midProducts, rightProducts);
 }
 
 function random() {
-    var leftRandom = Math.ceil(Math.random() * 19);
-    var midRandom = Math.ceil(Math.random() * 19);
-    var rightRandom = Math.ceil(Math.random() * 19);
+    var leftImg = Math.round(Math.random() * (itemsArr.length - 1))
+    var midImg = Math.round(Math.random() * (itemsArr.length - 1))
+    var rightImg = Math.round(Math.random() * (itemsArr.length - 1))
 
-    while (leftRandom === midRandom || midRandom === rightRandom || leftRandom === rightRandom) {
-        leftRandom = Math.ceil(Math.random() * 19);
-        midRandom = Math.ceil(Math.random() * 19);
-        rightRandom = Math.ceil(Math.random() * 19);
+    while (leftImg === midImg || midImg === rightImg || leftImg === rightImg) {
+        leftImg = Math.round(Math.random() * (itemsArr.length - 1))
+        midImg = Math.round(Math.random() * (itemsArr.length - 1))
+        rightImg = Math.round(Math.random() * (itemsArr.length - 1))
     };
 
-    renderImages(leftRandom, midRandom, rightRandom);
+    renderImages(leftImg, midImg, rightImg);
 }
 
 function numberOfTrials(object) {
-    for (let i = 0; i < arrayOfProducts.length; i++) {
-        if (arrayOfProducts[i].url === object) {
-            arrayOfProducts[i].counter++;
+    for (let i = 0; i < itemsArr.length; i++) {
+        if (itemsArr[i].url === object) {
+            itemsArr[i].counter++;
             trials--;
         }
     }
 }
 
 function numberShown(leftProducts, midProducts, rightProducts) {
-    arrayOfProducts[leftProducts].timesShown++;
-    arrayOfProducts[midProducts].timesShown++;
-    arrayOfProducts[rightProducts].timesShown++;
+    itemsArr[leftProducts].timesShown++;
+    itemsArr[midProducts].timesShown++;
+    itemsArr[rightProducts].timesShown++;
 }
 
 function countProducts(event) {
@@ -71,7 +71,7 @@ function countProducts(event) {
         }
     } else {
         products.removeEventListener("click", countProducts)
-        console.log(arrayOfProducts);
+        console.log(itemsArr);
     }
 }
 
@@ -109,7 +109,7 @@ results.addEventListener("click", function () {
     section.appendChild(ul);
     for (let i = 0; i < 20; i++) {
         var li = document.createElement("li");
-        li.textContent = arrayOfProducts[i].name + " had votes,  " + arrayOfProducts[i].counter + "  and was seen " + arrayOfProducts[i].timesShown
+        li.textContent = itemsArr[i].name + " had votes,  " + itemsArr[i].counter + "  and was seen " + itemsArr[i].timesShown
         ul.appendChild(li);
     }
 });
