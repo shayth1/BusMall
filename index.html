@@ -63,6 +63,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <p id="show"></p>
                     <section id="list_items">
                     </section>
                     <section width="300" height="500">
@@ -70,7 +71,7 @@
                     </section>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="deleteItems()">Clear Local Storage</button>
                     <button type="button" onClick="refreshPage()" class="btn btn-danger">Reset</button>
                 </div>
             </div>

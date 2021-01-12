@@ -53,7 +53,7 @@ function random() {
     }
 
     showProd.push(leftImg, midImg, rightImg);
-    console.log(showProd);
+    // console.log(showProd);
 
     renderImages(leftImg, midImg, rightImg);
 }
@@ -250,11 +250,46 @@ function renderResults() {
         section.appendChild(ul);
         for (let i = 0; i < 20; i++) {
             var li = document.createElement("li");
-            li.textContent = itemsArr[i].name + " had votes,  " + itemsArr[i].counter + "  and was seen " + itemsArr[i].timesShown
+            li.textContent = itemsArr[i].name + " had " + itemsArr[i].counter + " votes,  and was seen " + itemsArr[i].timesShown
             ul.appendChild(li);
+            var x = itemsArr[i].name + " had " + itemsArr[i].counter + " votes,  and was seen " + itemsArr[i].timesShown
+            var shayth = [];
+            shayth.push(x);
+            console.log(shayth);
+            x = localStorage.setItem("votes", JSON.stringify(itemsArr))
+
+
+
+            // function storeVotes() {
+            //     shayth = localStorage.setItem("votes", JSON.stringify([x]));
+            //     // console.log(localStorage);
+            // }
+            // storeVotes();
+
         }
+
     });
 }
 function refreshPage() {
     window.location.reload();
 }
+
+
+
+function displayItems() {
+    let l, i;
+    // Display items 
+    document.getElementById("show").innerHTML = "";
+    for (i = 0; i < localStorage.length; i++) {
+        res = localStorage.key(i);
+        document.getElementById("show").innerHTML += res;
+    }
+}
+displayItems();
+
+function deleteItems() {
+    // Clear localStorage items 
+    localStorage.clear();
+    location.reload();
+}
+
