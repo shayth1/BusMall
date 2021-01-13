@@ -19,6 +19,7 @@ function Product(name, image) {
 
     itemsArr.push(this);
 }
+//get imgs
 
 function renderImages(leftProduct, midProduct, rightProduct) {
     leftImage.setAttribute("src", itemsArr[leftProduct].url);
@@ -57,7 +58,7 @@ function random() {
 
     renderImages(leftImg, midImg, rightImg);
 }
-
+// claculate the number of trils
 function numberOfTrials(object) {
     for (let i = 0; i < itemsArr.length; i++) {
         if (itemsArr[i].url === object) {
@@ -67,12 +68,14 @@ function numberOfTrials(object) {
     }
 }
 
+//add numbershowen to pics
 function numberShown(leftProducts, midProducts, rightProducts) {
     itemsArr[leftProducts].timesShown++;
     itemsArr[midProducts].timesShown++;
     itemsArr[rightProducts].timesShown++;
 }
 
+// generate chart
 function getChart() {
     var arrayOfProductsNames = [];
     var arrayOfProductsCounters = [];
@@ -83,6 +86,8 @@ function getChart() {
         arrayOfProductsCounters.push(itemsArr[i].counter);
         arrayOfProductsShown.push(itemsArr[i].timesShown);
     }
+
+    //chart
 
     var chart = new Chart(productsCanvas, {
         type: 'bar',
@@ -201,6 +206,7 @@ function getChart() {
     });
 }
 
+
 function countProducts(event) {
     var targetId = event.target.id;
 
@@ -241,6 +247,7 @@ new Product("wine-glass", "wine-glass.jpg");
 random();
 productsSection.addEventListener("click", countProducts);
 
+//push reuslts
 function renderResults() {
     var results = document.getElementById("results");
     results.addEventListener("click", function () {
@@ -255,10 +262,12 @@ function renderResults() {
             var x = itemsArr[i].name + " had " + itemsArr[i].counter + " votes,  and was seen " + itemsArr[i].timesShown
             var shayth = [];
             shayth.push(x);
-            console.log(shayth);
-            x = localStorage.setItem("votes", JSON.stringify(itemsArr))
 
-
+            // var conv = shayth.toString();
+            // console.log(conv);
+            for (i = 0; i < 20; i++) {
+                t = localStorage.setItem("vote", JSON.stringify(shayth));
+            }
 
             // function storeVotes() {
             //     shayth = localStorage.setItem("votes", JSON.stringify([x]));
@@ -267,25 +276,29 @@ function renderResults() {
             // storeVotes();
 
         }
+        //get all items from locatstorage
+        function displayItems() {
+            let li, i;
+            // Display items 
+            document.getElementById("show").innerHTML = localStorage.getItem("vote");
+            for (i = 0; i < localStorage.length; i++) {
+                res = localStorage.key(shayth);
+                document.getElementById("show").innerHTML += res;
+            }
+        }
+        displayItems();
 
     });
 }
+//refresh function
 function refreshPage() {
     window.location.reload();
 }
 
 
 
-function displayItems() {
-    let l, i;
-    // Display items 
-    document.getElementById("show").innerHTML = "";
-    for (i = 0; i < localStorage.length; i++) {
-        res = localStorage.key(i);
-        document.getElementById("show").innerHTML += res;
-    }
-}
-displayItems();
+
+//clear datastorage
 
 function deleteItems() {
     // Clear localStorage items 
